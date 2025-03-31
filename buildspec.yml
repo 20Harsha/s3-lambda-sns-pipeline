@@ -6,16 +6,20 @@ phases:
       python: 3.9
     commands:
       - pip install --upgrade pip
-      - pip install -r requirements.txt -t .
+      - pip install -r requirements.txt -t package/
 
   build:
     commands:
-      - zip -r lambda_function.zip .
-      - ls -lh lambda_function.zip  # Debugging: Check if the zip file exists
+      - cp lambda_function.py package/  # Ensure lambda_function.py is included
+      - cd package  # Zip only the package folder (not the entire project)
+      - zip -r ../lambda_function.zip .
+      - cd ..
+      - ls -lh lambda_function.zip  # Check if the zip file exists
+      - unzip -l lambda_function.zip  # Verify contents
 
   post_build:
     commands:
       - echo "Verifying zip file..."
       - if [ -f lambda_function.zip ]; then echo "Zip exists, proceeding..."; else echo "Zip file missing!"; exit 1; fi
-      - aws lambda update-function-code --function-name JSON-File-Processing --zip-file fileb://lambda_function.zip --region us-east-1
+      - aws lambda update-function-code --function-name JSON-File-Processing --zip-file fileb://$(pwd)/lambda_function.zip --region us-east-1
       - echo "Lambda function successfully updated!"
