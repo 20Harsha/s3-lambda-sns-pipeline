@@ -2,7 +2,7 @@
 
 ## 🛠 Overview  
 This project automates the processing of **DoorDash delivery data** using **AWS Lambda, S3, SNS, and CodeBuild**. The workflow ensures efficient data processing and notifications for success/failure cases.  
-**Note:**  This mini project was part of an assignment given in this course "AWS Services For Data Engineering" on grow data skills. While this project uses DoorDash-style delivery data, it is purely for learning purposes and is not affiliated with DoorDash.
+**Note:**  This mini project was part of an assignment given in this course "AWS Services For Data Engineering" on [grow data skills](https://growdataskills.com/). While this project uses DoorDash-style delivery data, it is purely for learning purposes and is not affiliated with DoorDash.
 
 
 ## ⚙️ Architecture Diagram  
