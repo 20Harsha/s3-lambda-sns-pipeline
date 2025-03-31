@@ -19,6 +19,7 @@ logger = logging.getLogger()
 
 def lambda_handler(event, context):
     try:
+        logger.info("Function execution started")
         logger.info(f"Event received: {event}")
 
         event_time = event["Records"][0]["eventTime"]
