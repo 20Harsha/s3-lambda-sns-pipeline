@@ -6,15 +6,13 @@ phases:
       python: 3.9
     commands:
       - pip install --upgrade pip
-      - pip install -r requirements.txt -t package/
+      - pip install -r requirements.txt -t .
 
   build:
     commands:
-      - cp lambda_function.py package/
-      - cd package
-      - zip -r ../lambda_function.zip .
+      - zip -r lambda_function.zip .
 
   post_build:
     commands:
-      - aws lambda update-function-code --function-name JSON-File-Processing --zip-file fileb://lambda_function.zip
+      - aws lambda update-function-code --function-name JSON-File-Processing --zip-file fileb://lambda_function.zip --region us-east-1
       - echo "Lambda function successfully updated!"
