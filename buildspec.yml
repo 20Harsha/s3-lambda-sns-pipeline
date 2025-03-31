@@ -11,8 +11,11 @@ phases:
   build:
     commands:
       - zip -r lambda_function.zip .
+      - ls -lh lambda_function.zip  # Debugging: Check if the zip file exists
 
   post_build:
     commands:
+      - echo "Verifying zip file..."
+      - if [ -f lambda_function.zip ]; then echo "Zip exists, proceeding..."; else echo "Zip file missing!"; exit 1; fi
       - aws lambda update-function-code --function-name JSON-File-Processing --zip-file fileb://lambda_function.zip --region us-east-1
       - echo "Lambda function successfully updated!"
